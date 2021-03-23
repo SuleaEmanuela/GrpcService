@@ -28,9 +28,16 @@ namespace PersonRegistrationService.Services
             return Task.FromResult(new AddPersonResponse() { Status = AddPersonResponse.Types.Status.Success });
         }
 
-        public override Task GetAllPersons(Empty request, IServerStreamWriter<Person> responseStream, ServerCallContext context)
+        public override Task GetAllPersons(Empty request, IServerStreamWriter<GetAllPersonsResponse> responseStream, ServerCallContext context)
         {
-            return base.GetAllPersons(request, responseStream, context);
+
+            _logger.Log(LogLevel.Information, "GetAllPersons called!");
+            var persons = personOperations.GetPeople();
+
+            var response = new GetAllPersonsResponse();
+            response.Person.AddRange(persons);
+            return Task.FromResult(response);
+
         }
 
     }

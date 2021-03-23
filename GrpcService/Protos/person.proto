@@ -5,7 +5,7 @@ import "google/protobuf/empty.proto";
 
 service PersonRegistration{
 	rpc AddPerson(AddPersonRequest) returns (AddPersonResponse);
-	rpc GetAllPersons(google.protobuf.Empty) returns (stream Person);
+	rpc GetAllPersons(google.protobuf.Empty) returns (stream GetAllPersonsResponse);
 }
 
 message Person{
