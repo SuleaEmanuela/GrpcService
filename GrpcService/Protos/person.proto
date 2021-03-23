@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "PersonService.Protos";
+import "google/protobuf/empty.proto";
+
+service PersonRegistration{
+	rpc AddPerson(AddPersonRequest) returns (AddPersonResponse);
+	rpc GetAllPersons(google.protobuf.Empty) returns (stream Person);
+}
+
+message Person{
+	string name=1;
+	string gender=2;
+	int32 age=3;
+	string ID=4;
+}
+
+message AddPersonRequest{
+	Person person=1;
+}
+
+message AddPersonResponse{
+	Status status=1;
+
+	enum Status{
+		SUCCESS=0;
+		ERROR=1;
+	}
+}
+
+message GetAllPersonsResponse{
+	repeated Person person = 1;
+}
